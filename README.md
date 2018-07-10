@@ -61,37 +61,39 @@ And the difference between my network and network in the paper is the activation
 
 #### 2. Attempts to reduce overfitting in the model
 
+My model only picks the best weights after training and validation.
 
+My weights was put into the simulator to ensure there is no overfitting in the model.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+My model uses 'Adam' optimizer and it has such properties:
+```sh
+m_0 <- 0 (Initialize initial 1st moment vector)
+v_0 <- 0 (Initialize initial 2nd moment vector)
+t <- 0 (Initialize timestep)
+```
+The update rule for variable with gradient g:
+```sh
+t <- t + 1
+lr_t <- learning_rate * sqrt(1 - beta2^t) / (1 - beta1^t)
+
+m_t <- beta1 * m_{t-1} + (1 - beta1) * g
+v_t <- beta2 * v_{t-1} + (1 - beta2) * g * g
+variable <- variable - lr_t * m_t / (sqrt(v_t) + epsilon)
+```
+Also, it has defult epsilon which is 1e-08 and its value of weight_decay is 0.0.
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
-
-For details about how I created the training data, see the next section. 
+Because there are total three cameras embedded in the front of the car, I used all of them to generate proper data for training. For example, the simulator creates a file named 'driving_log.csv' which contains all three images' names (center, left, right) captured by three different cameras and those images are contained in the folder named '/IMG'. Besides, the 'driving_log.csv' contains the steering_angle, speed, throttle, brake_flag data. In this project I only used steering_angle as training label since the speed is controlled by the throttle and brake and its value affects nothing much but the GPU processing speed.
 
 ### Model Architecture and Training Strategy
 
-#### 1. Solution Design Approach
+#### 1. Visualizing the data & modifying it
 
-The overall strategy for deriving a model architecture was to ...
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
-
-#### 2. Final Model Architecture
+#### 2. Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
@@ -99,30 +101,9 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 ![alt text][image1]
 
-#### 3. Creation of the Training Set & Training Process
+#### 3. Training Process & Results
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
