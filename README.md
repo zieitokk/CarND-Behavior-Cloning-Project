@@ -19,10 +19,8 @@ The goals / steps of this project are the following:
 [image1]: ./Images/cropped_img.jpg
 [image2]: ./Images/angle_data.png
 [image3]: ./Images/angle_data_boom.png
-[image4]: ./Images/cropped_img.jpg
 [image5]: ./Images/boom.png
 [image6]: ./Autonomous_Mode.gif
-[image7]: ./Images/cropped_img.jpg
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -97,16 +95,19 @@ Because there are total three cameras embedded in the front of the car, I used a
 Before training the network, we have to visualize the data, for example, images from three different angles.
 
 <p align="middle">
-    <img src="./Images/left_2018_07_04_11_40_44_134.jpg" width="300"/>
-    <img src="./Images/center_2018_07_04_11_40_44_134.jpg" width="300"/>
-    <img src="./Images/right_2018_07_04_11_40_44_134.jpg" width="300"/>
+    <img src="./Images/left_2018_07_04_11_40_44_134.jpg" width="250"/>
+    <img src="./Images/center_2018_07_04_11_40_44_134.jpg" width="250"/>
+    <img src="./Images/right_2018_07_04_11_40_44_134.jpg" width="250"/>
 </p>
 
 We can see that the left image has shifted to left a little bit compared with the center image, so we have to add a correction into steering_angle before using the left image in training. So as to the right image, we have to minus a correction into steering_angle. And in our model, we set up the correction as 0.2.
 
 Meanwhile, for each of the training image, we have to get rid of redundant information in it. For example, the image has size 320x160 and the upper part of the image consists of redundant features, like trees, sky, hills. These features may disturb our network. So we crop out 50 pixels from the upper part and 20 pixels from the lower part and hence we have our final image resized into 320x90.
 
-![cropped image][image1]
+<p align="middle">
+    <img src="./Images/cropped_img.jpg" width="400"/>
+</p>
+
 
 
 
