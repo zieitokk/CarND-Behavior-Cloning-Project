@@ -93,6 +93,7 @@ Because there are total three cameras embedded in the front of the car, I used a
 ### Model Architecture and Training Strategy
 
 #### 1. Visualizing the data & modifying it
+<<<<<<< HEAD
 Before training the network, we have to visualize the data, for example, images from three different angles.
 
 <p align="middle">
@@ -106,6 +107,11 @@ We can see that the left image has shifted to left a little bit compared with th
 Meanwhile, for each of the training image, we have to get rid of redundant information in it. For example, the image has size 320x160 and the upper part of the image consists of redundant features, like trees, sky, hills. These features may disturb our network. So we crop out 50 pixels from the upper part and 20 pixels from the lower part and hence we have our final image resized into 320x90.
 
 ![cropped image][image1]
+=======
+
+
+#### 2. Model Architecture
+>>>>>>> 224d04305ea67b7b94a36862f37a640c977e63df
 
 After having visualized the images, we then see how the steering_angle looks like.
 
@@ -113,12 +119,17 @@ After having visualized the images, we then see how the steering_angle looks lik
 
 The steering_angle data has distributed around zero, which means that we have collect a good driving behavior data. However, due to the shape of track, which has more left corners than right corners, negative steering_angles appear more than positive ones. So we decide to flip the images and steering_angles in order to balance both side around zero point.
 
+<<<<<<< HEAD
 ![steering_angle after modified][image3]
+=======
+#### 3. Training Process & Results
+>>>>>>> 224d04305ea67b7b94a36862f37a640c977e63df
 
 After that, we shuffle the image data into two parts, training data and validation data, with the ratio 8:2.
 
 #### 2. Model Architecture
 
+<<<<<<< HEAD
 The model is a hierachical network. The network takes input image as shape 320x90x3 and normalizes it in each channel. It means that for each channel (R, G, B), all entries in 320x90 matrix should be divided by 127.5 and then subtracted by 1. It makes value of all entries in matrix range from -1 to 1.
 
 Next, normalized images convolve 24, 36, 48 filters with kernel_size 5. And the stride for the first three convolutional layers is 2, while using 'valid' padding and 'ReLU' activation function. Then, feature maps convolve 64, 64 filters with kernel_size 3, while the stride is 1, 'valid' padding and 'ReLU' activation function.
@@ -136,3 +147,5 @@ After training, we save the best weights into "model.hdf5" and run it in autonom
 
 ![Autonomous Mode][image6]
 
+=======
+>>>>>>> 224d04305ea67b7b94a36862f37a640c977e63df
